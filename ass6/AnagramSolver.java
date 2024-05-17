@@ -2,11 +2,11 @@ import java.util.*;
 
 public class AnagramSolver {
 
-
+ 
     private ArrayList<String> anagram = new ArrayList<String>();
     private ArrayList<String> dict = new ArrayList<String>();
     private ArrayList<String> phrase = new ArrayList<String>();
-    private HashMap<Character, Integer> letterInventory = new HashMap<>();
+    private HashMap<Character, Integer> letterInventory = new HashMap<>(); //hash map to store the letters and the count 
 
 
 
