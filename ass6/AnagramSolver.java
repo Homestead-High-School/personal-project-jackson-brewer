@@ -3,7 +3,6 @@ import java.util.*;
 public class AnagramSolver {
 
  
-    private ArrayList<String> anagram = new ArrayList<String>();
     private ArrayList<String> dict = new ArrayList<String>();
     private ArrayList<String> phrase = new ArrayList<String>();
     private HashMap<Character, Integer> letterInventory = new HashMap<>(); //hash map to store the letters and the count 
@@ -29,6 +28,16 @@ public class AnagramSolver {
         if(phrase.size() == 0){
             return;
         }
+        for(int i = 0; i < dict.size(); i++){
+            if(phrase.size() < dict.get(i).length()){
+                dict.remove(i);
+            }
+        }
+        System.out.println(dict);
+    }
+
+    public String resursion(String s){
+        return " ";
     }
 
     public void set(String phrase) { // this method sets the letter inventory to keep track of how many of each letter we have in the hash map
@@ -49,9 +58,7 @@ public class AnagramSolver {
         letterInventory.put(c, x--);
     }
 
-    public String resursion(String s){
-        return " ";
-    }
+
 }
 
 
