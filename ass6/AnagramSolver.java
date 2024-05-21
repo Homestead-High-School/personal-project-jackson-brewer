@@ -2,19 +2,15 @@ import java.util.*;
 
 public class AnagramSolver {
 
- 
     private ArrayList<String> dict = new ArrayList<String>();
     private ArrayList<String> phrase = new ArrayList<String>();
     private HashMap<Character, Integer> letterInventory = new HashMap<>(); //hash map to store the letters and the count 
-
-
 
     //constructs an anagram solver that will use the given list as its dictionary
     AnagramSolver(List<String> list){
         for(int i = 0; i < list.size(); i++){ 
             dict.add(list.get(i)); // adds all the words in the dictionary into the list 
         }
-        System.out.println(dict);
     } 
 
     //use recursive backtracking to find combinations of words that have the same letters as the given string
@@ -23,21 +19,30 @@ public class AnagramSolver {
         for(int i = 0; i < s.length(); i++){ // need to impliment a case where the imput isnt a letter or number *******
             phrase.add(s.substring(i,i+1));
         }
-        System.out.println(phrase);
         set(s);
         if(phrase.size() == 0){
             return;
         }
+        ArrayList<String> newDict = new ArrayList<String>();
         for(int i = 0; i < dict.size(); i++){
-            if(phrase.size() < dict.get(i).length()){
-                dict.remove(i);
+            if(phrase.size() >= dict.get(i).length()){
+                newDict.add(dict.get(i));
             }
         }
-        System.out.println(dict);
+        dict = newDict;
+        for(String x: dict){
+            recursion(s, x);
+        }
     }
 
-    public String resursion(String s){
-        return " ";
+    public boolean recursion(String s, String d){
+        for(int i = 0; i < s.length(); i++){
+            if(s.charAt(i) == (d.charAt(i))){
+                s = s.substring(i);
+                d = d.substring(i);
+            }
+        }
+        return true;
     }
 
     public void set(String phrase) { // this method sets the letter inventory to keep track of how many of each letter we have in the hash map
@@ -50,7 +55,6 @@ public class AnagramSolver {
                 letterInventory.put(letter, 1); // adds the new letter to the map
             }
         }
-        System.out.println(letterInventory);
     }
 
     public void subtract(char c){
