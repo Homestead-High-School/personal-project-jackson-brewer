@@ -19,35 +19,38 @@ public class AnagramSolver {
         for(int i = 0; i < s.length(); i++){ // need to impliment a case where the imput isnt a letter or number *******
             phrase.add(s.substring(i,i+1));
         }
-        set(s);
+        set(s); // sete the letter inventory 
         if(phrase.size() == 0){
             return;
         }
-        ArrayList<String> newDict = new ArrayList<String>();
+        ArrayList<String> newDict = new ArrayList<String>(); // updated dictionary with the correct size words
         for(int i = 0; i < dict.size(); i++){
             if(phrase.size() >= dict.get(i).length()){
-                newDict.add(dict.get(i));
+                newDict.add(dict.get(i)); // add good word to the new dicitonary
             }
         }
         String word = "";
-        dict = newDict;
-        for(String x: dict){
-            if(recursion(s, x)){
-                word += x;
-                System.out.println(word);
+        System.out.println(letterInventory);
+        for(String x: newDict){ // loop through all the words in the new dictionary 
+            if(recursion(s, x)){ // if the word in the dictionary can go into the phrase
+                System.out.println(letterInventory);
+                word += x; // add the word to the variable "word"
             }
         }
-        for(int j = 0; j < word.length(); j++){
-            phrase.remove(word.charAt(j));
-        }
-        System.out.println(phrase);
     }
 
     public boolean recursion(String s, String d){
-        int x = 0;
         // need a for loop to go through the dictionary word and if it contains all the letters, it removes it
         // right now I just remove if the letters are in the exact order of the dictionary word
+        /* 
+        for(int i = 0; i < d.length(); i++){
+            for(int j = 0; j < s.length(); j++){
+                if(d.charAt(i) == (s.charAt(j))){
+        */
+        // letterInventory.put(d.charAt(i), letterInventory.get(d.charAt(i))-1);
+        int x = 0;
             if(s.charAt(x) == (d.charAt(x))){
+                letterInventory.put(s.charAt(x), letterInventory.get(d.charAt(x))-1);
                 x++;
                 s = s.substring(x);
                 d = d.substring(x);
@@ -59,6 +62,7 @@ public class AnagramSolver {
                 return false;
             }
         return true;
+
     }
 
     public void set(String phrase) { // this method sets the letter inventory to keep track of how many of each letter we have in the hash map
