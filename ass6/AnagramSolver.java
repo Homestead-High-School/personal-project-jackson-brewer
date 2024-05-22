@@ -29,19 +29,35 @@ public class AnagramSolver {
                 newDict.add(dict.get(i));
             }
         }
+        String word = "";
         dict = newDict;
         for(String x: dict){
-            recursion(s, x);
+            if(recursion(s, x)){
+                word += x;
+                System.out.println(word);
+            }
         }
+        for(int j = 0; j < word.length(); j++){
+            phrase.remove(word.charAt(j));
+        }
+        System.out.println(phrase);
     }
 
     public boolean recursion(String s, String d){
-        for(int i = 0; i < s.length(); i++){
-            if(s.charAt(i) == (d.charAt(i))){
-                s = s.substring(i);
-                d = d.substring(i);
+        int x = 0;
+        // need a for loop to go through the dictionary word and if it contains all the letters, it removes it
+        // right now I just remove if the letters are in the exact order of the dictionary word
+            if(s.charAt(x) == (d.charAt(x))){
+                x++;
+                s = s.substring(x);
+                d = d.substring(x);
+                if(d.equals("")){
+                    return true;
+                }
+                recursion(s, d);
+            } else { 
+                return false;
             }
-        }
         return true;
     }
 
