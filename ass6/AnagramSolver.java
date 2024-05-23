@@ -3,7 +3,7 @@ import java.util.*;
 public class AnagramSolver {
 
     private ArrayList<String> dict = new ArrayList<String>();
-    private ArrayList<String> phrase = new ArrayList<String>();
+    private ArrayList<Character> phrase = new ArrayList<Character>();
     private HashMap<Character, Integer> letterInventory = new HashMap<>(); //hash map to store the letters and the count 
 
     //constructs an anagram solver that will use the given list as its dictionary
@@ -17,8 +17,9 @@ public class AnagramSolver {
     void print(String s, int max){
         s = s.replaceAll(" ", "");
         for(int i = 0; i < s.length(); i++){ // need to impliment a case where the imput isnt a letter or number *******
-            phrase.add(s.substring(i,i+1));
+            phrase.add(s.charAt(i));
         }
+        System.out.println(phrase);
         set(s); // sete the letter inventory 
         if(phrase.size() == 0){
             return;
@@ -33,8 +34,12 @@ public class AnagramSolver {
         System.out.println(letterInventory);
         for(String x: newDict){ // loop through all the words in the new dictionary 
             if(recursion(s, x)){ // if the word in the dictionary can go into the phrase
+                for(int i = 0; i < x.length(); i++){
+                    subtract(x.charAt(i));
+                    // need to remove the dictionary word from the phrase
+                    // for each char in phrase, loop through the dictionary word, and if the characters match each other, remove
+                }
                 System.out.println(letterInventory);
-                word += x; // add the word to the variable "word"
             }
         }
     }
@@ -81,7 +86,6 @@ public class AnagramSolver {
         int x = letterInventory.get(c);
         letterInventory.put(c, x--);
     }
-
 
 }
 
