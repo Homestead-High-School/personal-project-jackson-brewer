@@ -30,16 +30,18 @@ public class AnagramSolver {
                 newDict.add(dict.get(i)); // add good word to the new dicitonary
             }
         }
-        String word = "";
         System.out.println(letterInventory);
         for(String x: newDict){ // loop through all the words in the new dictionary 
             if(recursion(s, x)){ // if the word in the dictionary can go into the phrase
+                //s = remove(s,x);
+                //remove the dictionary word from the variable s
                 for(int i = 0; i < x.length(); i++){
                     subtract(x.charAt(i));
-                    // need to remove the dictionary word from the phrase
-                    // for each char in phrase, loop through the dictionary word, and if the characters match each other, remove
+                    phrase.remove(phrase.indexOf(x.charAt(i)));
                 }
-                System.out.println(letterInventory);
+                // s.remove x
+                //need to update the variable s
+                System.out.println(phrase);
             }
         }
     }
@@ -81,6 +83,7 @@ public class AnagramSolver {
             }
         }
     }
+
 
     public void subtract(char c){
         int x = letterInventory.get(c);
