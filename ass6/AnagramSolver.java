@@ -20,7 +20,7 @@ public class AnagramSolver {
             phrase.add(s.charAt(i));
         }
         System.out.println(phrase);
-        set(s); // sete the letter inventory 
+        set(s); // sets the letter inventory 
         if(phrase.size() == 0){
             return;
         }
@@ -33,44 +33,32 @@ public class AnagramSolver {
         System.out.println(letterInventory);
         for(String x: newDict){ // loop through all the words in the new dictionary 
             if(recursion(s, x)){ // if the word in the dictionary can go into the phrase
-                //s = remove(s,x);
-                s = remove(s,x);
-                //remove the dictionary word from the variable s
                 for(int i = 0; i < x.length(); i++){
                     subtract(x.charAt(i));
                     phrase.remove(phrase.indexOf(x.charAt(i)));
                 }
-                // s.remove x
-                //need to update the variable s
                 System.out.println(phrase);
             }
         }
     }
 
     public boolean recursion(String s, String d){
-        // need a for loop to go through the dictionary word and if it contains all the letters, it removes it
-        // right now I just remove if the letters are in the exact order of the dictionary word
-        /* 
         for(int i = 0; i < d.length(); i++){
-            for(int j = 0; j < s.length(); j++){
-                if(d.charAt(i) == (s.charAt(j))){
-        */
-        // letterInventory.put(d.charAt(i), letterInventory.get(d.charAt(i))-1);
-        int x = 0;
-            if(s.charAt(x) == (d.charAt(x))){
-                letterInventory.put(s.charAt(x), letterInventory.get(d.charAt(x))-1);
-                x++;
-                s = s.substring(x);
-                d = d.substring(x);
+            if(s.indexOf(d.charAt(i))>=0){
+                letterInventory.put(s.charAt(i), letterInventory.get(d.charAt(i))-1);
+                s = remove(s , d.charAt(i));
+                d = remove(d, d.charAt(i));
+                i--;
                 if(d.equals("")){
                     return true;
                 }
-                recursion(s, d);
-            } else { 
+                //recursion(s, d);
+            }
+            else{
                 return false;
             }
+        }
         return true;
-
     }
 
     public void set(String phrase) { // this method sets the letter inventory to keep track of how many of each letter we have in the hash map
@@ -85,15 +73,16 @@ public class AnagramSolver {
         }
     }
 
-    public String remove(String s, String x){
+    public String remove(String s, char x){
         for(int i = 0; i < s.length(); i++){
-            for(int j = 0; j < x.length(); j++){
-                if(s.charAt(i)==x.charAt(j))
-                //remove the char at i from the variable s
+            if(s.charAt(i) == x && s.indexOf(x)==0){
+                s = s.substring(1);
+            }
+            else if(s.charAt(i) == x){
+                s = s.substring(0, s.charAt(i-1)) + s.substring(s.charAt(i+1)); //error on this
             }
         }
-        System.out.println(s);
-        return s;
+    return s;
     }
 
     public void subtract(char c){
