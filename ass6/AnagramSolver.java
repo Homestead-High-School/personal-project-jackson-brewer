@@ -77,11 +77,14 @@ public class AnagramSolver {
         for(int i = 0; i < s.length(); i++){
             if(s.charAt(i) == x && s.indexOf(x)==0){
                 s = s.substring(1);
+                return s;
             }
-            else if(s.charAt(i) == x){
-                s = s.substring(0, s.charAt(i-1)) + s.substring(s.charAt(i+1)); //error on this
+            else if(s.charAt(i) == x && i > 0){
+                s = s.substring(0, s.charAt(i)) + s.substring(s.charAt(i)); //error on this
+                return s;
             }
         }
+        System.out.println(s);
     return s;
     }
 
