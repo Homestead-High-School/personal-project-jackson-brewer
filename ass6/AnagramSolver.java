@@ -34,6 +34,7 @@ public class AnagramSolver {
         for(String x: newDict){ // loop through all the words in the new dictionary 
             if(recursion(s, x)){ // if the word in the dictionary can go into the phrase
                 //s = remove(s,x);
+                s = remove(s,x);
                 //remove the dictionary word from the variable s
                 for(int i = 0; i < x.length(); i++){
                     subtract(x.charAt(i));
@@ -84,6 +85,16 @@ public class AnagramSolver {
         }
     }
 
+    public String remove(String s, String x){
+        for(int i = 0; i < s.length(); i++){
+            for(int j = 0; j < x.length(); j++){
+                if(s.charAt(i)==x.charAt(j))
+                //remove the char at i from the variable s
+            }
+        }
+        System.out.println(s);
+        return s;
+    }
 
     public void subtract(char c){
         int x = letterInventory.get(c);
