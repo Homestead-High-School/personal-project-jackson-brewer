@@ -36,7 +36,7 @@ public class AnagramSolver {
                 for(int i = 0; i < x.length(); i++){
                     subtract(x.charAt(i));
                     //phrase.remove(phrase.indexOf(x.charAt(i)));
-                    s = s.remove(s. x.charAt(i));
+                    s = remove(s, x.charAt(i));
                 }
 
             }
