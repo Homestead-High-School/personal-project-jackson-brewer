@@ -17,6 +17,7 @@ public class AnagramSolver {
     //use recursive backtracking to find combinations of words that have the same letters as the given string
     void print(String s, int max){
         s = s.replaceAll(" ", "");
+        s = s.toLowerCase();
         for(int i = 0; i < s.length(); i++){ // need to impliment a case where the imput isnt a letter or number *******
             phrase.add(s.charAt(i));
         }
@@ -36,7 +37,7 @@ public class AnagramSolver {
                 for(int i = 0; i < x.length(); i++){
                     subtract(x.charAt(i));
                     //phrase.remove(phrase.indexOf(x.charAt(i)));
-                    s = remove(s, x.charAt(i));
+                    //s = remove(s, x.charAt(i));
                 }
 
             }
