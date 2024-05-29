@@ -2,6 +2,7 @@ import java.util.*;
 
 public class AnagramSolver {
 
+    public ArrayList<String> anagram = new ArrayList<String>();
     private ArrayList<String> dict = new ArrayList<String>();
     private ArrayList<Character> phrase = new ArrayList<Character>();
     private HashMap<Character, Integer> letterInventory = new HashMap<>(); //hash map to store the letters and the count 
@@ -19,7 +20,6 @@ public class AnagramSolver {
         for(int i = 0; i < s.length(); i++){ // need to impliment a case where the imput isnt a letter or number *******
             phrase.add(s.charAt(i));
         }
-        System.out.println(phrase);
         set(s); // sets the letter inventory 
         if(phrase.size() == 0){
             return;
@@ -30,29 +30,32 @@ public class AnagramSolver {
                 newDict.add(dict.get(i)); // add good word to the new dicitonary
             }
         }
-        System.out.println(letterInventory);
         for(String x: newDict){ // loop through all the words in the new dictionary 
             if(recursion(s, x)){ // if the word in the dictionary can go into the phrase
+                anagram.add(x);
                 for(int i = 0; i < x.length(); i++){
                     subtract(x.charAt(i));
-                    phrase.remove(phrase.indexOf(x.charAt(i)));
+                    //phrase.remove(phrase.indexOf(x.charAt(i)));
+                    s = s.remove(s. x.charAt(i));
                 }
-                System.out.println(phrase);
+
             }
         }
+        System.out.print(anagram);
+        anagram.clear();
+
     }
 
     public boolean recursion(String s, String d){
         for(int i = 0; i < d.length(); i++){
             if(s.indexOf(d.charAt(i))>=0){
                 letterInventory.put(s.charAt(i), letterInventory.get(d.charAt(i))-1);
-                s = remove(s , d.charAt(i));
-                d = remove(d, d.charAt(i));
+               s = remove(s , d.charAt(i));
+               d = remove(d, d.charAt(i));
                 i--;
                 if(d.equals("")){
                     return true;
                 }
-                //recursion(s, d);
             }
             else{
                 return false;
@@ -79,14 +82,14 @@ public class AnagramSolver {
                 s = s.substring(1);
                 return s;
             }
-            else if(s.charAt(i) == x && i > 0){
-                int a = s.indexOf(s.charAt(i));
-                int b = s.indexOf(s.charAt(i+1));
-                s = s.substring(0,a) + s.substring(b); //error on this
+            else if(s.charAt(i) == x && i > 0 && i < s.length()-1){
+                s = s.substring(0,i) + s.substring(i+1); 
                 return s;
             }
+            else if(s.charAt(i) == x && i == s.length()-1){
+                s = s.substring(0,i-1);
+            }
         }
-        System.out.println(s);
     return s;
     }
 
