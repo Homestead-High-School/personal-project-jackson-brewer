@@ -80,7 +80,9 @@ public class AnagramSolver {
                 return s;
             }
             else if(s.charAt(i) == x && i > 0){
-                s = s.substring(0, s.charAt(i)) + s.substring(s.charAt(i)); //error on this
+                int a = s.indexOf(s.charAt(i));
+                int b = s.indexOf(s.charAt(i+1));
+                s = s.substring(0,a) + s.substring(b); //error on this
                 return s;
             }
         }
