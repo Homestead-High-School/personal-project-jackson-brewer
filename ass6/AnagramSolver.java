@@ -16,6 +16,7 @@ public class AnagramSolver {
 
     //use recursive backtracking to find combinations of words that have the same letters as the given string
     void print(String s, int max){
+        String stri = s;
         s = s.replaceAll(" ", "");
         s = s.toLowerCase();
         for(int i = 0; i < s.length(); i++){ // need to impliment a case where the imput isnt a letter or number *******
@@ -31,19 +32,29 @@ public class AnagramSolver {
                 newDict.add(dict.get(i)); // add good word to the new dicitonary
             }
         }
-        for(String x: newDict){ // loop through all the words in the new dictionary 
-            if(recursion(s, x)){ // if the word in the dictionary can go into the phrase
-                anagram.add(x);
-                for(int i = 0; i < x.length(); i++){
-                    subtract(x.charAt(i));
-                    //phrase.remove(phrase.indexOf(x.charAt(i)));
-                    //s = remove(s, x.charAt(i));
+        boolean go = true;
+        while(go){
+            ArrayList <String> st = new ArrayList<>();
+            go=false;
+            for(String x: newDict){ // loop through all the words in the new dictionary 
+                if(recursion(s, x)){ // if the word in the dictionary can go into the phrase
+                    anagram.add(x);
+                    st.add(x);
+                    go=true;
+                    for(int i = 0; i < x.length(); i++){
+                        subtract(x.charAt(i));
+                        s = remove(s, x.charAt(i));
+                    }
                 }
-
             }
+            for(int i = 0; i < st.size(); i++){
+                newDict.remove(newDict.indexOf(st.get(i)));
+            }
+            s = stri;
+            //if anagram variable to keep track of the size) = stri.length();
+            printAnagram(anagram);        
+            anagram.clear();
         }
-        System.out.print(anagram);
-        anagram.clear();
 
     }
 
@@ -99,6 +110,14 @@ public class AnagramSolver {
         letterInventory.put(c, x--);
     }
 
+    public void printAnagram(ArrayList <String> a){
+        for(int i = 0; i < a.size(); i++){{
+            a.add(0, a.get(a.size()-1));
+            a.remove(a.size()-1);
+            System.out.println(a);
+        }
+    }
+    }
 }
 
 
