@@ -51,8 +51,16 @@ public class AnagramSolver {
                 newDict.remove(newDict.indexOf(st.get(i)));
             }
             s = stri;
+            String anagramTotal = "";
             //if anagram variable to keep track of the size) = stri.length();
-            printAnagram(anagram);        
+            for(int l = 0; l < anagram.size(); l++){
+                anagramTotal += anagram.get(l);
+            stri = stri.replace(" ", "");
+            }
+            if(anagramTotal.length() == stri.length()){
+                printAnagram(anagram);
+            }
+            anagramTotal = "";      
             anagram.clear();
         }
 
@@ -90,7 +98,7 @@ public class AnagramSolver {
 
     public String remove(String s, char x){
         for(int i = 0; i < s.length(); i++){
-            if(s.charAt(i) == x && s.indexOf(x)==0){
+            if(s.charAt(i) == x && s.indexOf(x)==0){ // if the matching letter is the first in the phrase
                 s = s.substring(1);
                 return s;
             }
@@ -99,7 +107,7 @@ public class AnagramSolver {
                 return s;
             }
             else if(s.charAt(i) == x && i == s.length()-1){
-                s = s.substring(0,i-1);
+                s = s.substring(0,i);
             }
         }
     return s;
